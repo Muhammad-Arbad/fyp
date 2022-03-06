@@ -51,7 +51,7 @@ class _myProfileState extends State<myProfile> {
                     ))
                   : CircleAvatar(
                       radius: 80,
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Colors.redAccent,
                     ),
               Positioned(
                   bottom: 0,
