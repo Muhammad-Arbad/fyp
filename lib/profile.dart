@@ -1,8 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'functions/functions.dart';
 
 class myProfile extends StatefulWidget {
   const myProfile({Key? key}) : super(key: key);
@@ -142,14 +143,13 @@ class _myProfileState extends State<myProfile> {
       padding: EdgeInsets.all(20),
       child: Column(
         children: [
-          listofItems(),
+          listofItems(this.context),
         ],
       ),
     );
   }
 
   File? img;
-
   Future takingOrSelectingImage(ImageSource imgSource) async {
     ImageSource imageSource = imgSource;
     try {
@@ -165,75 +165,41 @@ class _myProfileState extends State<myProfile> {
     }
   }
 
-  listofItems() {
-    return Column(
-      children: [
-        ListTile(
-          leading: Icon(Icons.person),
-          title: Text("My Profile"),
-          onTap: () {
-            Navigator.pop(context);
-            //Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratePaper()));
-          },
-        ),
-        const Divider(
-          color: Colors.black,
-        ),
-        ListTile(
-          leading: Icon(Icons.login),
-          title: Text("Logout"),
-          onTap: () {
-            Navigator.pop(context);
-            //Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratePaper()));
-          },
-        ),
-        const Divider(
-          color: Colors.black,
-        ),
-        ListTile(
-          leading: Icon(Icons.remove_red_eye),
-          title: Text("Change Password"),
-          onTap: () {
-            Navigator.pop(context);
-            //Navigator.push(context, MaterialPageRoute(builder: (context)=>MyPapers()));
-          },
-        ),
-      ],
-    );
-  }
+  // listofItems() {
+  //   return Column(
+  //     children: [
+  //       ListTile(
+  //         leading: Icon(Icons.person),
+  //         title: Text("My Profile"),
+  //         onTap: () {
+  //           Navigator.pop(context);
+  //           //Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratePaper()));
+  //         },
+  //       ),
+  //       const Divider(
+  //         color: Colors.black,
+  //       ),
+  //       ListTile(
+  //         leading: Icon(Icons.login),
+  //         title: Text("Logout"),
+  //         onTap: () {
+  //           Navigator.pop(context);
+  //           //Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratePaper()));
+  //         },
+  //       ),
+  //       const Divider(
+  //         color: Colors.black,
+  //       ),
+  //       ListTile(
+  //         leading: Icon(Icons.remove_red_eye),
+  //         title: Text("Change Password"),
+  //         onTap: () {
+  //           Navigator.pop(context);
+  //           //Navigator.push(context, MaterialPageRoute(builder: (context)=>MyPapers()));
+  //         },
+  //       ),
+  //     ],
+  //   );
+  // }
 
-  dialogBox() {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0)), //this right here
-      child: Container(
-        height: 200,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'What do you want to remember?'),
-              ),
-              SizedBox(
-                width: 320.0,
-                child: RaisedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Save",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: const Color(0xFF1BC0C5),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }

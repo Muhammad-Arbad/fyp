@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tailor_application/selectCustomerTailor.dart';
+import 'sharedPreferences/userPreferences.dart';
 
 class introduction extends StatefulWidget {
   const introduction({Key? key}) : super(key: key);
-
   @override
   _introductionState createState() => _introductionState();
 }
@@ -11,6 +12,14 @@ class introduction extends StatefulWidget {
 class _introductionState extends State<introduction> {
 
   final controller = PageController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    applicationSharedPreferences.setIntroVisibility(false);
+    print(applicationSharedPreferences.getIntroVisibility());
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -61,7 +70,12 @@ class _introductionState extends State<introduction> {
               onDotClicked: (index)=>controller.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.easeIn),
 
             ),),
-            TextButton(onPressed: (){controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeIn);}, child: Text("Next")),
+            TextButton(onPressed: (){
+              if(controller.page != 2)
+              controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
+              else
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>selectCustomerTailor()));
+              }, child: Text("Next")),
           ],
         ),
       ),

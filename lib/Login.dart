@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailor_application/profile.dart';
 
 class Login extends StatefulWidget {
   String type;
@@ -41,11 +42,18 @@ class _LoginState extends State<Login> {
                   prefixIcon: Icon(Icons.remove_red_eye),
                 )),
             SizedBox(height: 10,),
-            SizedBox(height: 50,child: ElevatedButton( onPressed: (){}, child: Text("Login",))),
+            SizedBox(height: 50,child: ElevatedButton( onPressed: (){NavigateToNextScreen();}, child: Text("Login",))),
 
           ],
         ),
       ),
     );
+  }
+
+  NavigateToNextScreen(){
+    if(widget.type == "Tailor")
+      {
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>myProfile()));
+      }
   }
 }

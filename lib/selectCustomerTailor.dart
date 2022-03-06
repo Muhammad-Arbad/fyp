@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tailor_application/Login.dart';
 import 'package:tailor_application/customerRegister.dart';
+import 'package:tailor_application/sharedPreferences/userPreferences.dart';
 import 'package:tailor_application/tailorRegister.dart';
 
 enum enumSelect { tailor, customer, notselect }
@@ -22,7 +23,14 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select"+"$width"),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Select"+"$width"),
+            InkWell(child: Icon(Icons.reset_tv),onTap: (){applicationSharedPreferences.setIntroVisibility(true);},)
+
+          ],
+        ),
       ),
       body: Container(
         padding: EdgeInsets.all(30),
@@ -42,7 +50,7 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
                       },
                       child: selection(
                         Icon(
-                          Icons.emoji_people_rounded,
+                          Icons.cut,
                           size: 50,
                         ),
                         Text(
@@ -61,7 +69,7 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
                         });
                       },
                       child: selection(
-                        Icon(Icons.room_service, size: 50),
+                        Icon(Icons.person, size: 50),
                         Text(
                           "Customer",
                           style: TextStyle(fontSize: 30),
@@ -99,11 +107,6 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
               ),
             ),
           ],
-        ),
-      ),
-       drawer: Drawer(
-        child: Column(
-          children: [],
         ),
       ),
     );
