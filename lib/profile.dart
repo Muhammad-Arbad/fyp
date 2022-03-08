@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tailor_application/template.dart';
 
 import 'functions/functions.dart';
 
@@ -21,6 +22,7 @@ class _myProfileState extends State<myProfile> {
           appBar: AppBar(
             title: Text("Profile"),
           ),
+          //body: listofmodels(),//Container(child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>listofmodels()));},child: Text("Template"),),),
           drawer: Drawer(
             child: Column(
               children: [

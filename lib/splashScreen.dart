@@ -36,16 +36,17 @@ class _splashState extends State<splash> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Container(
+    return SafeArea(child: Scaffold(body:Container(
       color: Colors.white,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.cut)
+            Icon(Icons.cut,size: 100,),
+            Text("Tailor Application",style: TextStyle(fontSize: 50),)
           ],
         ),
       ),
-    ));
+    ) ,));
   }
 }

@@ -26,7 +26,7 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Select"+"$width"),
+            Text("Select"),
             InkWell(child: Icon(Icons.reset_tv),onTap: (){applicationSharedPreferences.setIntroVisibility(true);},)
 
           ],

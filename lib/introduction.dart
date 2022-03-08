@@ -38,15 +38,15 @@ class _introductionState extends State<introduction> {
           controller: controller,
           children: [
             Container(
-              color: Colors.redAccent,
-              child: Center(child: Text("Screen 1"),),
+              color: Colors.black12,
+              child: Center(child: Text("How to Use"),),
             ),
             Container(
-              color: Colors.blue,
+              color: Colors.lightGreenAccent,
               child: Center(child: Text("Screen 2"),),
             ),
             Container(
-              color: Colors.green,
+              color: Colors.amberAccent,
               child: Center(child: Text("Screen 3"),),
             ),
           ],
