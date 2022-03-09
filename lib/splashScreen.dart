@@ -43,7 +43,7 @@ class _splashState extends State<splash> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.cut,size: 100,),
-            Text("Tailor Application",style: TextStyle(fontSize: 50),)
+            Text("Tailor Application",style: TextStyle(fontSize: 30),),
           ],
         ),
       ),

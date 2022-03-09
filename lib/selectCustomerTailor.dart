@@ -3,6 +3,7 @@ import 'package:tailor_application/Login.dart';
 import 'package:tailor_application/customerRegister.dart';
 import 'package:tailor_application/sharedPreferences/userPreferences.dart';
 import 'package:tailor_application/tailorRegister.dart';
+//import 'dart:io' show Platform;
 
 enum enumSelect { tailor, customer, notselect }
 
@@ -20,23 +21,45 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
 
   @override
   Widget build(BuildContext context) {
+    //print(Platform.operatingSystem);
     double width = MediaQuery.of(context).size.width;
+    bool pf = Theme.of(context).platform == TargetPlatform.android;
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Select"),
-            InkWell(child: Icon(Icons.reset_tv),onTap: (){applicationSharedPreferences.setIntroVisibility(true);},)
+      appBar: pf ? AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Android"),
+              InkWell(child: Icon(Icons.reset_tv),onTap: (){applicationSharedPreferences.setIntroVisibility(true);},)
 
-          ],
-        ),
-      ),
+            ],
+          )
+      ) : AppBar(
+        toolbarHeight: 100,
+        title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(Icons.cut,size: 200,),
+          Text("Home"),
+          Text("Home"),
+          Text("Home"),
+          Text("Home"),
+          Text("Home"),
+          Text("Home"),
+          Text("Home"),
+          Text("Home"),
+          Text("Home"),
+
+          InkWell(child: Icon(Icons.reset_tv),onTap: (){applicationSharedPreferences.setIntroVisibility(true);},)
+
+        ],
+      ),),
       body: Container(
         padding: EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Expanded(flex: 1, child: Center(child: Text("Select",style: TextStyle(fontSize: 40),)),),
             Expanded(
               flex: 3,
               child: Row(
