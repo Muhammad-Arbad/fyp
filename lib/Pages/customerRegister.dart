@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class tailorRegister extends StatefulWidget {
-  const tailorRegister({Key? key}) : super(key: key);
+class customerRegister extends StatefulWidget {
+  const customerRegister({Key? key}) : super(key: key);
 
   @override
-  _tailorRegisterState createState() => _tailorRegisterState();
+  _customerRegisterState createState() => _customerRegisterState();
 }
 
-class _tailorRegisterState extends State<tailorRegister> {
+class _customerRegisterState extends State<customerRegister> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(title: Text(""),),
       body: Container(
         padding: EdgeInsets.all(30),
@@ -24,7 +23,7 @@ class _tailorRegisterState extends State<tailorRegister> {
                 onChanged: (value) {
                 },
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(
+                 border: OutlineInputBorder(
                   ),
                   hintText: 'Username',
                   prefixIcon: Icon(Icons.person),
@@ -47,20 +46,10 @@ class _tailorRegisterState extends State<tailorRegister> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(
                   ),
-                  hintText: 'Address',
-                  prefixIcon: Icon(Icons.location_on),
-                )),
-            SizedBox(height: 5,),
-            TextFormField(
-              onChanged: (value) {
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
+                  hintText: 'Phone Number',
+                  prefixIcon: Icon(Icons.call),
                 ),
-                hintText: 'Phone Number',
-                prefixIcon: Icon(Icons.call),
-              ),
-              keyboardType: TextInputType.number,
+            keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly
               ],

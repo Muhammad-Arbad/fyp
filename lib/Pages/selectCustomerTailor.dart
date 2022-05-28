@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tailor_application/Login.dart';
-import 'package:tailor_application/customerRegister.dart';
-import 'package:tailor_application/sharedPreferences/userPreferences.dart';
-import 'package:tailor_application/tailorRegister.dart';
+import 'package:tailor_application/Pages/Login.dart';
+import 'package:tailor_application/Pages/Template.dart';
+import 'package:tailor_application/Pages/customerRegister.dart';
+import 'package:tailor_application/SharedPreferences/userPreferences.dart';
+import 'package:tailor_application/Pages/tailorRegister.dart';
 //import 'dart:io' show Platform;
 
 enum enumSelect { tailor, customer, notselect }
@@ -20,30 +21,31 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
 
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(applicationSharedPreferences.getIntroVisibility());
+  }
+
+  @override
   Widget build(BuildContext context) {
     //print(Platform.operatingSystem);
     double width = MediaQuery.of(context).size.width;
     bool pf = Theme.of(context).platform == TargetPlatform.android;
-    return Scaffold(
-      appBar: pf ? AppBar(
-          title: Row(
+    return ScaffoldTemplate(
+      appBarTitle : pf ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Android"),
               InkWell(child: Icon(Icons.reset_tv),onTap: (){applicationSharedPreferences.setIntroVisibility(true);},)
 
             ],
-          )
-      ) : AppBar(
-        toolbarHeight: 100,
-        title: Row(
+      ):
+        //toolbarHeight: 100,
+        Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.cut,size: 200,),
-          Text("Home"),
-          Text("Home"),
-          Text("Home"),
-          Text("Home"),
+          Icon(Icons.cut,size: 100,),
           Text("Home"),
           Text("Home"),
           Text("Home"),
@@ -53,8 +55,9 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
           InkWell(child: Icon(Icons.reset_tv),onTap: (){applicationSharedPreferences.setIntroVisibility(true);},)
 
         ],
-      ),),
-      body: Container(
+      ),
+
+      OurWidget: Container(
         padding: EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -132,14 +135,18 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
           ],
         ),
       ),
+      ScaffoldTemplateBottomSheet: null,
+      floatingActionButton: null,
     );
   }
 
   void changeScreen(enumSelect enu) {
     if (enu == enumSelect.tailor) {
+      //applicationSharedPreferences.setCustomerOrTailor("tailor");
       //Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
       Navigator.push(context, MaterialPageRoute(builder: (context) => tailorRegister()));
     } else if (enu == enumSelect.customer) {
+      //applicationSharedPreferences.setCustomerOrTailor("customer");
       Navigator.push(context, MaterialPageRoute(builder: (context) => customerRegister()));
     } else if (enu == enumSelect.notselect) {
       showDialog(
@@ -162,6 +169,7 @@ class _selectCustomerTailorState extends State<selectCustomerTailor> {
   void NavigateToLogin(enumSelect enu) {
     if (enu == enumSelect.tailor) {
       //Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
+
       Navigator.push(context, MaterialPageRoute(builder: (context) => Login("Tailor")));
     } else if (enu == enumSelect.customer) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => Login("Customer")));

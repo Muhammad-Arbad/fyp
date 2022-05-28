@@ -39,8 +39,18 @@ dependencies:
   #Dependencies for custome work
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.13
+  #shared_preferences: ^2.0.15
   image_picker: ^0.8.4+10
   smooth_page_indicator: ^1.0.0+2
+  fl_chart: 0.20.1 # NullSafe
+  firebase_core: ^1.11.0
+  firebase_auth: ^3.3.5
+  cloud_firestore: ^3.1.13
+  telephony: ^0.1.4 #For sending sms
+  geolocator: ^8.2.0 # For Current Location
+  http: ^0.13.4
+
+
 
 dev_dependencies:
   flutter_test:

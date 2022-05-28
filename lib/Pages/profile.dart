@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tailor_application/template.dart';
-
-import 'functions/functions.dart';
+import 'package:tailor_application/Pages/tailorRegister.dart';
+import 'package:tailor_application/Pages/templateModels.dart';
+import 'package:tailor_application/SharedPreferences/userPreferences.dart';
+import '../classes/profileBody.dart';
+import '../functions/functions.dart';
 
 class myProfile extends StatefulWidget {
   const myProfile({Key? key}) : super(key: key);
@@ -14,21 +17,41 @@ class myProfile extends StatefulWidget {
 }
 
 class _myProfileState extends State<myProfile> {
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //applicationSharedPreferences.init();
+  }
+
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) =>
       OrientationBuilder(builder: (context, orientation) {
         final isPotrate = orientation == Orientation.portrait;
-        return Scaffold(
-          appBar: AppBar(
-            title: Text("Profile"),
-          ),
-          //body: listofmodels(),//Container(child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>listofmodels()));},child: Text("Template"),),),
-          drawer: Drawer(
-            child: Column(
-              children: [
-                Expanded(flex: 1, child: profileImage()),
-                Expanded(flex: 2, child: profileSettings()),
-              ],
+        return SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text("Profile"),
+            ),
+            body: ProfileBody(),
+            // floatingActionButton: FloatingActionButton(
+            //   onPressed: ()async{
+            //     await _auth.signOut();
+            //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>tailorRegister()));
+            //   },
+            //   child: Icon(Icons.logout)
+            // ),
+            //body: listofmodels(),//Container(child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>listofmodels()));},child: Text("Template"),),),
+            drawer: Drawer(
+              child: Column(
+                children: [
+                  Expanded(flex: 1, child: profileImage()),
+                  Expanded(flex: 2, child: profileSettings()),
+                ],
+              ),
             ),
           ),
         );
@@ -52,7 +75,7 @@ class _myProfileState extends State<myProfile> {
                       height: 160,
                       fit: BoxFit.cover,
                     ))
-                  : CircleAvatar(
+                  : const CircleAvatar(
                       radius: 80,
                       backgroundColor: Colors.redAccent,
                     ),
@@ -78,7 +101,7 @@ class _myProfileState extends State<myProfile> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(10),
                                           child: Row(
-                                            children: [
+                                            children: const [
                                               Icon(Icons.photo),
                                               SizedBox(width: 10,),
                                               Text("Select from Gallery")
@@ -94,7 +117,7 @@ class _myProfileState extends State<myProfile> {
                                         child:  Padding(
                                           padding: const EdgeInsets.all(10),
                                           child: Row(
-                                            children: [
+                                            children: const[
                                               Icon(Icons.camera_alt),
                                               SizedBox(width: 10,),
                                               Text("Take a Photo")
@@ -128,12 +151,12 @@ class _myProfileState extends State<myProfile> {
           Center(
               child: Text(
             "Name",
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 20),
           )),
           Center(
               child: Text(
             "example@gmail.com",
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 10),
           )),
         ],
       ),
@@ -166,42 +189,18 @@ class _myProfileState extends State<myProfile> {
       print("Failed to get Image");
     }
   }
+}
 
-  // listofItems() {
-  //   return Column(
-  //     children: [
-  //       ListTile(
-  //         leading: Icon(Icons.person),
-  //         title: Text("My Profile"),
-  //         onTap: () {
-  //           Navigator.pop(context);
-  //           //Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratePaper()));
-  //         },
-  //       ),
-  //       const Divider(
-  //         color: Colors.black,
-  //       ),
-  //       ListTile(
-  //         leading: Icon(Icons.login),
-  //         title: Text("Logout"),
-  //         onTap: () {
-  //           Navigator.pop(context);
-  //           //Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratePaper()));
-  //         },
-  //       ),
-  //       const Divider(
-  //         color: Colors.black,
-  //       ),
-  //       ListTile(
-  //         leading: Icon(Icons.remove_red_eye),
-  //         title: Text("Change Password"),
-  //         onTap: () {
-  //           Navigator.pop(context);
-  //           //Navigator.push(context, MaterialPageRoute(builder: (context)=>MyPapers()));
-  //         },
-  //       ),
-  //     ],
-  //   );
-  // }
+class ProfileBody extends StatefulWidget {
+  const ProfileBody({Key? key}) : super(key: key);
 
+  @override
+  _ProfileBodyState createState() => _ProfileBodyState();
+}
+
+class _ProfileBodyState extends State<ProfileBody> {
+  @override
+  Widget build(BuildContext context) {
+    return Analytics();
+  }
 }
