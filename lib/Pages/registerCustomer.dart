@@ -110,8 +110,7 @@ Future CreateCustomer(
     required String address,
     required String phone,
     required BuildContext context}) async {
-  final customerDoc =
-      FirebaseFirestore.instance.collection("Customers").doc(phone);
+  final customerDoc = FirebaseFirestore.instance.collection("Customers").doc(phone);
   final newCustomer = customerRegisterClass(c_name: name, c_address: address, c_phone: phone);
   final json = newCustomer.toJson();
   final textSuccess = "Customer Registered Successfully";

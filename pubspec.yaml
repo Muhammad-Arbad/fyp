@@ -49,6 +49,7 @@ dependencies:
   telephony: ^0.1.4 #For sending sms
   geolocator: ^8.2.0 # For Current Location
   http: ^0.13.4
+  webview_flutter: ^3.0.4
 
 
 

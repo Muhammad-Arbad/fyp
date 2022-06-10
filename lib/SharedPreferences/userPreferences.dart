@@ -6,6 +6,7 @@ class applicationSharedPreferences{
   static const _switchKey = "isSwitch";
   //final _preferences = SharedPreferences.getInstance() ;
 
+
   static Future init()async=>
     _preferences = await SharedPreferences.getInstance();
 
@@ -22,9 +23,9 @@ class applicationSharedPreferences{
     }
 
 
-  // static void getustomerOrTailor() async{
-  //   _preferences?.getString(_switchKey);
-  // }
+  static void getustomerOrTailor() async{
+    _preferences?.getString(_switchKey);
+  }
     static String? getCustomerOrTailor() {
       return _preferences?.getString(_switchKey);
     }

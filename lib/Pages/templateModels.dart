@@ -14,30 +14,23 @@ class listofmodels extends StatefulWidget {
 class _listofmodelsState extends State<listofmodels> {
 
   List<String> s = [];//applicationSharedPreferences.getTemplateAddOrRemove()??["false","false","false","false","false","false","false","false","false"];
-  String testing = "";
-  //List<String>? isSwitch = applicationSharedPreferences.getTemplateAddOrRemove();
-
 
   @override
   void initState(){
     // TODO: implement initState
-    applicationSharedPreferences.init();
-    setState(() {
-      this.s = applicationSharedPreferences.getTemplateAddOrRemove()??["false","false","false","false","false","false","false","false","false"];
-      //print("InitState function = $s");
-      print("set State initSteate is called");
+    setList();
+    setState((){
+      // applicationSharedPreferences.init();
+      // print(applicationSharedPreferences.getTemplateAddOrRemove());
+      // s = applicationSharedPreferences.getTemplateAddOrRemove()??["false","false","false","false","false","false","false","false","false"];
+      print("InitState function = $s");
+      //print("set State initSteate is called");
     });
-    print("before Super initSteate is called");
     super.initState();
-    print("After Super initSteate is called");
+    print(applicationSharedPreferences.getTemplateAddOrRemove());
+    //print("After Super initSteate is called");
   }
 
-  @override
-  void deactivate() {
-    // TODO: implement deactivate
-    super.deactivate();
-    print("This is deactivate function");
-  }
 
   @override
   Widget build(BuildContext context)=>OrientationBuilder(builder: (context,orientation)
@@ -71,13 +64,6 @@ class _listofmodelsState extends State<listofmodels> {
             ),
           )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          //CreateCustomer(name: "fsd", address: "fsd", phone: "03356727047", context: context);
-          //createModal(name: "Coat", price: "7000", imgPath: "123");
-        },
-        child: Icon(Icons.add),
       ),
     );
   }
@@ -142,6 +128,7 @@ class _listofmodelsState extends State<listofmodels> {
                   else{
                     s[index] = "false";
                     applicationSharedPreferences.setTemplateAddOrRemove(s);
+                    deleteModal(name:name);
                   }
                 });
               }),
@@ -158,16 +145,41 @@ class _listofmodelsState extends State<listofmodels> {
     final newModel = AddModalToYourLibrary(name: name, price: price, imagePath: imgPath);
     final json = newModel.toJson();
     modelDoc.set(json);
+  }
 
+  deleteModal({required String name}){
+    final modelDoc = FirebaseFirestore.instance.collection("tailors").doc("1").collection("ModelDetails").doc(name);
+    modelDoc.delete();
+  }
+
+  void setList() {
+    //applicationSharedPreferences.init();
+    print(applicationSharedPreferences.getTemplateAddOrRemove());
+    s =  applicationSharedPreferences.getTemplateAddOrRemove()??["false","false","false","false","false","false","false","false","false"];
   }
 }
 
+// Stream<List<AddModalToYourLibrary>> getModelList()=>
+//     FirebaseFirestore.instance.collection("collectionPath").snapshots().map(
+//             (snapshot) => snapshot.docs
+//             .map((e) => AddModalToYourLibrary.FromJason(e.data())))
+//         .toList();
+
+Stream<List<AddModalToYourLibrary>> getModelList() =>
+    FirebaseFirestore.instance.collection("tailors").doc('1').collection("ModelDetails").snapshots().map(
+            (snapshot) => snapshot.docs
+            .map((e) => AddModalToYourLibrary.FromJason(e.data()))
+            .toList());
 
 class AddModalToYourLibrary{
-
   final String name,price,imagePath;
   AddModalToYourLibrary({required this.name,required this.price,required this.imagePath});
 
   Map<String,dynamic> toJson()=>
       {'name':name,'price':price,'imagePath':imagePath};
+
+  static AddModalToYourLibrary FromJason(Map<String,dynamic> json){
+    return AddModalToYourLibrary(name: json['name'], price: json['price'], imagePath: json['imagePath']);
+  }
+
 }

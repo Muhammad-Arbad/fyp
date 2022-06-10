@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tailor_application/Classes/introClass.dart';
 import 'package:tailor_application/Functions/functions.dart';
 import 'package:tailor_application/Pages/Template.dart';
 import 'package:tailor_application/Pages/registerCustomer.dart';
-
 import 'allCustomers.dart';
 
 
@@ -33,7 +31,6 @@ class _modelDetailState extends State<modelDetail> {
       appBarTitle: Text("Model Details"),
     OurWidget: Column(
       children: [
-        //SizedBox(height: 15,),
         Expanded(
           flex: 1,
           child: Row(

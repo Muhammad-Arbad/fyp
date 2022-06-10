@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,7 +40,7 @@ class _AnalyticsState extends State<Analytics> {
                       // print(applicationSharedPreferences.getTemplateAddOrRemove());
                       NavigateToOtherScreen(context, listofmodels());
                     },
-                    child: BuildContainers("Add Templates", "\$100k",
+                    child: BuildContainers("Add Templates", Text("100"),
                         Icons.monetization_on, (Colors.blue[300])!),
                   ),
 
@@ -47,7 +48,7 @@ class _AnalyticsState extends State<Analytics> {
                     onTap: () {
                       NavigateToOtherScreen(context, libraryListOfModels());
                     },
-                    child: BuildContainers("Total Orders", "123",
+                    child: BuildContainers("Tailor Library", Text("50"),
                         Icons.shopping_cart_outlined, (Colors.orange[300])!),
                   ),
                   InkWell(
@@ -55,17 +56,22 @@ class _AnalyticsState extends State<Analytics> {
                       NavigateToOtherScreen(context, AllCustomers());
                     },
                     child: BuildContainers(
-                        "All Customers", "5", Icons.sms, (Colors.red[300])!),
+                        "All Customers",
+                        FutureBuilder(future: countCustomers(),builder: (context,snapshor){
+                          if(snapshor.hasData){
+                            Object? data = snapshor.data;
+                            return Text("$data");
+                          }
+                          else
+                            return const CircularProgressIndicator();
+                        },),
+                        Icons.sms, (Colors.red[300])!),
                   ),
                   InkWell(
                     onTap: () {
-                      //NavigateToOtherScreen(context,RegisterCustomer());
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterCustomer()));
+                      NavigateToOtherScreen(context,RegisterCustomer());
                     },
-                    child: BuildContainers("Add Customer", "+", Icons.person,
+                    child: BuildContainers("Add Customer", Icon(Icons.add), Icons.person,
                         (Colors.indigo[300])!),
                   ),
                   //LineChartSample2(),
@@ -88,7 +94,7 @@ class _AnalyticsState extends State<Analytics> {
   }
 
   Widget BuildContainers(
-      String title, String detail, IconData icon, Color bgcolor) {
+      String title, Widget detail, IconData icon, Color bgcolor) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(08),
       child: Container(
@@ -120,12 +126,13 @@ class _AnalyticsState extends State<Analytics> {
               children: [
                 Container(
                   //padding: EdgeInsets.only(left: 15),
-                  child: Text(detail,
-                      style: const TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white)),
-                ),
+                  child: detail,),
+                //   Text(detail,
+                //       style: const TextStyle(
+                //           fontSize: 35,
+                //           fontWeight: FontWeight.w500,
+                //           color: Colors.white)),
+                // ),
                 Container(
                     child: Icon(
                   icon,
@@ -138,5 +145,13 @@ class _AnalyticsState extends State<Analytics> {
         ),
       ),
     );
+  }
+
+  Future<int> countCustomers() async{
+    final query =  FirebaseFirestore.instance.collection("Customers");
+    final doc = await query.get();
+    int count = doc.size;
+    print(count);
+    return count;
   }
 }
